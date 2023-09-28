@@ -48,16 +48,18 @@ function gwt {
       # Create a new bare repository with a main branch and a README.md file
       init "${@}"
     ;;
-    "add_remote")
-      shift
-      # Add a remote to the current repository
-      git remote add "${1}" "${2}"
-      git config "remote.${1}.fetch" "+refs/heads/*:refs/remotes/${1}/*"
-    ;;
+    # "add_remote")
+    #   shift
+    #   # Add a remote to the current repository
+    #   git remote add "${1}" "${2}"
+    #   git config "remote.${1}.fetch" "+refs/heads/*:refs/remotes/${1}/*"
+    # ;;
     "add_branch")
       shift
       # Add a worktree for an existing branch
       git worktree add "${1}"
+      cd "${1}"
+      git branch --set-upstream-to="origin/${1}" "${1}"
     ;;
     "new_branch")
       shift
